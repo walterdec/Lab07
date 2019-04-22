@@ -3,7 +3,7 @@ package it.polito.tdp.poweroutages.model;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 
-public class PowerOutage {
+public class PowerOutage implements Comparable<PowerOutage>{
 	
 	private int id;
 	private int nerc_id;
@@ -70,6 +70,17 @@ public class PowerOutage {
 		if (id != other.id)
 			return false;
 		return true;
+	}
+
+	@Override
+	public int compareTo(PowerOutage other) {
+		if(this.getDate_event_began().getYear() != other.getDate_event_began().getYear())
+			return this.getDate_event_began().getYear() - other.getDate_event_began().getYear();
+		else if(this.getDate_event_began().getMonth() != other.getDate_event_began().getMonth())
+			return this.getDate_event_began().getMonthValue() - other.getDate_event_began().getMonthValue();
+		else
+			return this.getDate_event_began().getDayOfMonth() - other.getDate_event_began().getDayOfMonth();
+					
 	}
 	
 	

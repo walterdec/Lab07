@@ -1,6 +1,7 @@
 package it.polito.tdp.poweroutages;
 
 import java.net.URL;
+import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -50,6 +51,7 @@ public class PowerOutagesController{
     		int anniMax = Integer.parseInt(yearsTxtField.getText());
     		int oreMax = Integer.parseInt(hoursTxtField.getText());
     		List<PowerOutage> outages = model.cercaSoluzione(selectedNerc, anniMax, oreMax);
+    		Collections.sort(outages);
     		txtArea.appendText("Total people affected: "+Integer.toString(model.calcolaPersone(outages))+"\n");
     		txtArea.appendText("Total hours of outage: "+Long.toString(model.contaOre(outages))+"\n");
     		for(PowerOutage p : outages) {
