@@ -3,9 +3,7 @@ package it.polito.tdp.poweroutages;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.Set;
 
-import it.polito.tdp.poweroutages.db.PowerOutageDAO;
 import it.polito.tdp.poweroutages.model.Model;
 import it.polito.tdp.poweroutages.model.Nerc;
 import it.polito.tdp.poweroutages.model.PowerOutage;
@@ -45,13 +43,15 @@ public class PowerOutagesController{
 
     @FXML
     void doCalcolaSoluzione(ActionEvent event) {
+    	model.reset();
     	txtArea.clear();
     	Nerc selectedNerc = choiceBox.getSelectionModel().getSelectedItem();
     	try{
     		int anniMax = Integer.parseInt(yearsTxtField.getText());
     		int oreMax = Integer.parseInt(hoursTxtField.getText());
-    		Set<PowerOutage> outages = model.cercaSoluzione(selectedNerc, anniMax, oreMax);
+    		List<PowerOutage> outages = model.cercaSoluzione(selectedNerc, anniMax, oreMax);
     		txtArea.appendText("Total people affected: "+Integer.toString(model.calcolaPersone(outages))+"\n");
+    		txtArea.appendText("Total hours of outage: "+Long.toString(model.contaOre(outages))+"\n");
     		for(PowerOutage p : outages) {
     			txtArea.appendText(p.toString()+"\n");
     		}

@@ -47,8 +47,7 @@ public class PowerOutage {
 
 	@Override
 	public String toString() {
-		return "PowerOutage [id=" + id + ", nerc_id=" + nerc_id + ", customers_affected=" + customers_affected
-				+ ", date_event_began=" + date_event_began + ", date_event_finished=" + date_event_finished + "]";
+		return date_event_began.getYear()+" "+date_event_began+" "+date_event_finished+" "+this.getHours()+" "+customers_affected;
 	}
 
 	@Override
